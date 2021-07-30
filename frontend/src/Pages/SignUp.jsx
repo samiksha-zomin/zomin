@@ -1,13 +1,18 @@
 import React, { Fragment, useState, useEffect } from 'react';
+// import { Redirect } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import Axios from 'axios';
 
+//import Components
 import Header from '../Components/Header';
 import Heading from '../Components/Heading';
 
+//import GOOGLE
+import GoogleLogin from 'react-google-login';
+
 //Icon
 import { Button, Form } from 'react-bootstrap';
-import { FaGoogle, FaFacebook } from 'react-icons/fa';
+import { FaFacebook } from 'react-icons/fa';
 import { BiError, BiMessageCheck } from "react-icons/bi";
 
 //Toast
@@ -40,13 +45,7 @@ function SignUp() {
 
     }, []);
 
-    // const handleChange = (event) => {
-    //     //Set the value of tweet
-    //     setFullName(event && event.target.value ? event.target.value : "");
-    // }
-
-
-    const save = (event) => {
+    const signup = (event) => {
         if (fullName && email && contactNumber && password) {
             Axios.post('http://localhost:3001/auth/signup', {
                 fullName: fullName,
@@ -56,13 +55,12 @@ function SignUp() {
             })
                 .then((response) => {
                     if (response.data === 'Email sent successfully') {
-                        console.log(response.data);
                         return toast.success(
-                        <Fragment>
-                            <BiMessageCheck />
-                            <span>Email sent successfully!</span>
-                        </Fragment>);
-                        
+                            <Fragment>
+                                <BiMessageCheck />
+                                <span>Email sent successfully!</span>
+                            </Fragment>);
+
                     } else if (response.data === 'Email Exist!') {
                         return toast.error(
                             <Fragment>
@@ -70,7 +68,6 @@ function SignUp() {
                                 <span>This Email already exists!</span>
                             </Fragment>
                         );
-                        //return window.location.href = '/index';
                     } else if (response.data === 'Invalid Email!') {
                         return toast.error(
                             <Fragment>
@@ -79,14 +76,16 @@ function SignUp() {
                             </Fragment>
                         );
                     } else {
-                        console.log(response.data);
-                        <Fragment>
-                        <BiError />
-                        <span>System is Error. Please Try Again!</span>
-                    </Fragment>
+                        return toast.error(
+                            <Fragment>
+                                <BiError />
+                                <span>System is Error. Please Try Again!</span>
+                            </Fragment>
+                        );
                     }
                 });
-        }; event.preventDefault();
+        };
+        event.preventDefault();
         setEmail("");
         setFullName("");
         setContactNumber("");
@@ -97,12 +96,108 @@ function SignUp() {
     const [emailConf, setEmailConf] = useState("");
     const [passwordConf, setPasswordConf] = useState("");
 
+
+    const login = (event) => {
+        if (emailConf && passwordConf) {
+            Axios.post('http://localhost:3001/auth/login', {
+                email: emailConf,
+                password: passwordConf
+            })
+                .then((response) => {
+                    if (response.data === 'Normal login!') {
+                        return toast.success(
+                            <Fragment>
+                                <BiMessageCheck />
+                                <span>Normal login!</span>
+                            </Fragment>);
+
+                    } else if (response.data === 'first time login!') {
+                        return toast.success(
+                            <Fragment>
+                                <BiMessageCheck />
+                                <span>first time login!</span>
+                            </Fragment>);
+                    } else if (response.data === 'Your Account have been blocked. Please contact our team!') {
+                        return toast.error(
+                            <Fragment>
+                                <BiError />
+                                <span>Your Acount have been blocked. Please contact our team!</span>
+                            </Fragment>
+                        );
+                    } else if (response.data === 'Please Verify your account!') {
+                        return toast.warn(
+                            <Fragment>
+                                <BiError />
+                                <span>Please Verify your account!</span>
+                            </Fragment>
+                        );
+                    } else if (response.data === 'Wrong email / password!') {
+                        return toast.error(
+                            <Fragment>
+                                <BiError />
+                                <span>Wrong email / password!</span>
+                            </Fragment>
+                        );
+                    } else if (response.data === 'Email does not exist!') {
+                        return toast.error(
+                            <Fragment>
+                                <BiError />
+                                <span>Email does not exist!</span>
+                            </Fragment>
+                        );
+                    } else {
+                        <Fragment>
+                            <BiError />
+                            <span>System is Error. Please Try Again!</span>
+                        </Fragment>
+                    }
+                });
+        };
+        event.preventDefault();
+        setEmailConf("");
+        setPasswordConf("");
+    };
+
+    //FACEBOOK
+    const responseGoogle = (response) => {
+        console.log(response);
+        Axios.post('http://localhost:3001/auth/google', {
+                fullName: response.profileObj.name,
+                email: response.profileObj.email,
+                googleId: response.profileObj.googleId,
+                imageUrl: response.profileObj.imageUrl
+            })
+            .then((response) => {
+                if (response.data === 'Login to next page') {
+                    return toast.success(
+                        <Fragment>
+                            <BiMessageCheck />
+                            <span>Login to next page</span>
+                        </Fragment>);
+
+                } else {
+                    return toast.error(
+                        <Fragment>
+                            <BiError />
+                            <span>System is Error. Please Try Again!</span>
+                        </Fragment>
+                    );
+                }
+            });
+    };
+
     return (
         <Fragment>
             <Helmet>
                 <title>Sign Up</title>
             </Helmet>
             <Header />
+
+
+
+
+
+
             <div id="signUp" className="col-11 col-md-9 text-center">
                 <div className="row">
                     <div className="col-12 col-md-6">
@@ -137,6 +232,9 @@ function SignUp() {
                                             }}
                                         />
                                     </Form.Group>
+                                    <Button variant="primary" type="submit" onClick={login}>
+                                        Log In
+                                    </Button>
                                 </Form>
                             </div>
 
@@ -203,12 +301,10 @@ function SignUp() {
                                     <div className="mb-3">
                                         <label>By clicking sign up, you agree to Zom-In's <a className="text-decoration-none" href="https://github.com" >Privacy Policy</a> and <a className="text-decoration-none" href="https://github.com">Term of Use</a></label>
                                     </div>
-                                    <Button variant="primary" type="submit" onClick={save}>
+                                    <Button variant="primary" type="submit" onClick={signup}>
                                         Sign Up
                                     </Button>
                                 </Form>
-                                {/* <h1>{signUpStatus}</h1> */}
-
                             </div>
 
                         }
@@ -231,7 +327,13 @@ function SignUp() {
                     <div className="col-12 col-md-6 divider ">
                         <Heading content={userIsRegistered ? "Log In with Social Network" : "Sign Up with Social Network"} />
                         <div className="mb-5 d-grid gap-3">
-                            <Button variant="btnGoogle" href="/google"><FaGoogle />{' '}{userIsRegistered ? "Log In with Google" : "Sign Up with Google"}</Button>
+                            <GoogleLogin
+                                clientId="300636281235-n81sjr9a8p5fk392rq658p34p2nl3dq7.apps.googleusercontent.com"
+                                buttonText="Login with Google"
+                                onSuccess={responseGoogle}
+                                onFailure={responseGoogle}
+                                cookiePolicy={'single_host_origin'}
+                            />
                         </div>
                         <div className="mb-5 d-grid gap-3">
                             <Button variant="btnFacebook" href="/facebook"><FaFacebook />{' '}{userIsRegistered ? "Log In with Facebook" : "Sign Up with Facebook"}</Button>
