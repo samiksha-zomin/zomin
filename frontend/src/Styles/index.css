@@ -1,0 +1,59 @@
+#home .profilecover {
+  height: 5rem;
+}
+
+#home .text-small {
+  font-size: 0.75rem !important;
+}
+
+#home .createPost .btn-outline-secondary:hover {
+  background-color: #f5f5f5 !important;
+  color: #262626 !important;
+}
+
+#home .createPost .btn-outline-secondary:focus {
+  box-shadow: none !important;
+}
+
+#home .editPosthere .inputPost,
+#home .inputPost {
+  min-height: 10rem;
+  height: 10rem;
+  max-height: 15rem;
+  resize: vertical;
+}
+
+#home .editPosthere .inputPost:focus,
+#home .inputPost:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+
+#home .mmm input[type="file"] ,
+#home .inputPostFile input[type="file"] {
+  position: absolute !important;
+  top: 0 !important;
+  right: 0 !important;
+  min-width: 100% !important;
+  min-height: 100% !important;
+  font-size: 100px !important;
+  text-align: right !important;
+  filter: alpha(opacity=0) !important;
+  opacity: 0 !important;
+  outline: none !important;
+  cursor: inherit !important;
+  display: block !important;
+}
+
+#home .imgPostPreview {
+    border-color: #e3f2fd !important;
+}
+
+#home .createPostForm {
+    display: contents !important;
+}
+
+.post > a {
+  text-decoration: none !important;
+}

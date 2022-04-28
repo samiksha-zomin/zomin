@@ -1,0 +1,132 @@
+.searchbox {
+    background-color: #e8e8e8 !important;
+    padding: 1rem 3rem !important;
+}
+
+.filterbox > div {
+    margin: 0.25rem !important;
+}
+
+.cardOppo {
+    min-height: 150px;
+    padding: 0.5rem 0.5rem;
+    background-color: #fff;
+    align-items: flex-end;
+    transition: 0.5s ease-in-out;
+    border: none !important;
+    text-align: center !important;
+    border: 1px solid #fff !important;
+    border-radius: 10px !important;
+    overflow: hidden;
+    margin: 1rem 0 !important;
+    max-width: calc(50% - 2rem) !important;
+    max-height: 100% !important;
+}
+
+.cardOppo:hover {
+    border: 1px solid #6c757d !important;
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+
+}
+
+.cardLOppo {
+    min-height: 150px;
+    padding: 0.5rem 0.5rem;
+    min-width: calc(100% - 1rem) !important;
+    max-height: 100% !important;
+    margin: 2rem 3rem;
+}
+
+.imgOppo {
+    height: auto;
+    width: 100%;
+    max-width: 100%;
+    border-radius: 50% !important;
+    object-fit: contain;
+    transition: 0.5s !important;
+}
+
+.cardJobDetail > p {
+    margin: 0.3rem 0.25rem !important;
+    /* max-width: 10rem !important; */
+    font-size: 15px;
+}
+
+.sortBy {
+    width: 15% !important;
+}
+
+.bg-fullTime {
+    background-color: #33aaff !important;
+    background-color: #bae1ff !important;
+}
+
+.bg-contract {
+    background-color: #f86bc2 !important;
+    background-color: #ffb3ba !important;
+
+}
+
+.bg-internship {
+    background-color: #60c364 !important;
+    background-color: #baffc9 !important;
+}
+
+.bg-partTime {
+    background-color: #b03bc4 !important;
+    background-color: #dfc2dd !important;
+}
+
+.saveBtn, .unSaveBtn {
+    transition: 0.5s ease-in-out;
+    cursor: pointer;
+}
+
+.saveBtn:hover path {
+    fill:  #f44336;
+}
+
+.unSaveBtn:hover path {
+    fill:  #ffccd2;
+}
+
+/* Opportunity Landing Page */
+
+.oppoCoverImg {
+    min-width: 100% !important;
+    width: 728px !important;
+    max-height: 250px !important;
+    object-fit: cover;
+}
+
+.partnerCoverLogo img {
+    transform: translate(25%, -50%)!important;
+    border-radius: 50% !important;
+    border: 5px solid #fff !important;
+    min-width: 20px !important;
+    object-fit: cover;
+    width: 150px !important;
+}
+
+.cardJobDetail > p {
+    margin: 0.5rem !important;
+}
+
+@media (max-width: 767.98px) {
+    .cardOppo {
+        max-width: calc(100% - 0px) !important;
+    }
+    .filterbox > .col {
+        margin: 0.2rem !important;
+        min-width: 5rem;
+        max-width: 8rem;
+    }
+    .searchbox {
+        padding: 0.25rem 1rem !important;
+    }
+
+    .cardLOppo {
+        margin: 0;
+    }
+    
+}

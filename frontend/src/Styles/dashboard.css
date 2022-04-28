@@ -1,0 +1,43 @@
+#dashboard .applicationStatus {
+    color: red !important;
+    margin: 1rem !important;
+    max-width: calc(20% - 2rem) !important;
+}
+
+#dashboard .coverImage {
+    min-width: 100% !important;
+    width: 728px !important;
+    max-height: 250px !important;
+    object-fit: cover !important;
+}
+
+#dashboard .roundedProfile {
+    width: 7.5rem;
+    height: 7.5rem;
+    object-fit: cover;
+    transform: translate(-10%, 35%)!important;
+    border-radius: 50% !important;
+    border: 5px solid #fff !important;
+}
+
+#dashboard .roundedPreview {
+    width: 12.5rem;
+    height: 12.5rem;
+    object-fit: cover;
+}
+
+@media (max-width: 575.98px) { 
+    #dashboard .coverImage {
+        min-width: 100% !important;
+        width: 970px !important;
+        max-height: 350px !important;
+        object-fit: cover !important;
+    }
+
+    #dashboard .roundedProfile {
+        width: 5rem;
+        height: 5rem;
+    transform: translate(-10%, -10%)!important;
+
+    }
+}
